@@ -43,7 +43,7 @@ public class AuthTest {
     }
     @Test
     // Navigate to locations and create new location
-    public void Locations() {
+    public void locations() {
          WebElement locMenuItem = driver.findElement(new By.ByXPath("//*[@id=\"app\"]/div/header/nav/div[1]/ul/li[2]/a"));
          locMenuItem.click();
          WebDriverWait wait = (new WebDriverWait(driver, 5));
@@ -55,14 +55,16 @@ public class AuthTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
          WebElement VelgType = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/form/div[2]/div[1]/div[1]/label"));
          VelgType.click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-         WebElement LocationName = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/form/div[2]/div[4]/div/input//div[2]"));
+        WebDriverWait wait2 = (new WebDriverWait(driver, 5));
+        wait2.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/form/div[2]/div[4]/div/input")));
+         WebElement LocationName = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/form/div[2]/div[4]/div/input"));
          LocationName.sendKeys("ik test location");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-         WebElement NesteButton = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/form/div[3]/button/span"));
-         NesteButton.click();
-         WebElement CrossButton = driver.findElement(By.className("sc-htoDjs kkGQIe"));
-         CrossButton.click();
+        WebElement NesteButton = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/form/div[3]/button/span"));
+        NesteButton.click();
+        WebElement CrossButton = driver.findElement(By.xpath("/html/body/div[2]/a"));
+        CrossButton.click();
+
     }
 
       @AfterClass
@@ -72,5 +74,11 @@ public class AuthTest {
           WebElement logoutButton = driver.findElement(By.className("Select-control"));
           logoutButton.click();
           driver.quit();
+ }
+
+ private void selectElementInFiler(String text ){
+         driver.findElement(By.className(".sc-bwzfXH.iRbVbm [name]")).getAttribute(text);
+
+
  }
 }
